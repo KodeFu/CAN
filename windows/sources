@@ -1,0 +1,35 @@
+# <COPYRIGHT_TAG>
+# Module Name:
+#
+#    can
+#
+# Abstract:
+#
+#    Sources file for the CAN driver.
+#
+
+TARGETNAME=can
+TARGETTYPE=DRIVER
+
+USE_LIBCMT=1
+
+KMDF_VERSION=1
+
+INF_NAME=can
+
+MISCFILES=$(OBJ_PATH)\$(O)\$(INF_NAME).inf
+
+NTTARGETFILES=
+
+#
+# List of source files to compile.
+#
+SOURCES=            \
+        can_main.c  \
+	can_fifo.c  \
+	icp_can.c   \
+        can.rc
+
+C_DEFINES=
+
+

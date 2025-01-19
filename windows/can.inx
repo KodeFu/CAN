@@ -1,0 +1,114 @@
+
+; <COPYRIGHT_TAG>
+
+;
+; CAN.INF
+; 
+; INF to install the Controller Area Network Driver.
+;
+  
+ 
+[Version] 
+Signature = "$Windows NT$" 
+Class=System
+ClassGUID={4d36e97d-e325-11ce-bfc1-08002be10318} 
+Provider=%Intel% 
+CatalogFile=can.cat
+DriverVer=
+
+[DestinationDirs] 
+CANModel.Files.x86_12 = 12 
+CANModel_CoInstaller_CopyFiles = 11
+
+[SourceDisksNames.x86]
+0=%Desc_x860%
+
+[SourceDisksNames.ia64]
+
+
+[SourceDisksFiles.x86]
+can.sys=0,, 
+
+[SourceDisksFiles.ia64]
+
+
+[Manufacturer] 
+%Intel%=Intel
+
+[Intel]
+%CANModelDesc0%=CANModel_Inst,PCI\VEN_8086&DEV_5039
+%CANModelDesc1%=CANModel_Inst,PCI\VEN_8086&DEV_503a
+
+[CANModel_Inst.ntx86] 
+CopyFiles = CANModel.Files.x86_12 
+
+[CANModel_Inst.ntx86.Services] 
+AddService = can,0x00000002,CANModel_Service_Instx86, 
+
+[CANModel_Service_Instx86] 
+ServiceType = %SERVICE_KERNEL_DRIVER% 
+StartType = %SERVICE_DEMAND_START% 
+ErrorControl = %SERVICE_ERROR_IGNORE% 
+ServiceBinary = %12%\can.sys 
+
+
+[CANModel.Files.x86_12] 
+can.sys
+
+[CANModel_EventLog_Inst] 
+AddReg = CANModel_EventLog_Inst.AddReg 
+ 
+[CANModel_EventLog_Inst.AddReg] 
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll" 
+HKR,,TypesSupported,%REG_DWORD%,7
+
+
+;
+;  *******CANModel Coinstaller installation*******
+;
+[DestinationDirs]
+CANModel_CoInstaller_CopyFiles = 11
+
+[CANModel.NT.CoInstallers]
+AddReg=ECHO_Device_CoInstaller_AddReg
+CopyFiles=CANModel_CoInstaller_CopyFiles
+
+[CANModel_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01005.dll,WdfCoInstaller"
+
+[CANModel_CoInstaller_CopyFiles]
+WdfCoInstaller01005.dll
+
+[SourceDisksFiles]
+wdfcoinstaller01005.dll=1
+
+[CANModel.NT.Wdf]
+KmdfService = CANModel, CANModel_wdfsect
+[CANModel_wdfsect]
+KmdfLibraryVersion = 1.5
+
+
+[Strings] 
+
+;  *******Localizable Strings******* 
+Intel= "Intel Corporation" 
+Desc_x860= "Intel Corporation Systemdrivers" 
+CANModelDesc0= "Controller Area Network for Intel(R) EP80579 Integrated Processor Product Line – 5039" 
+CANModelDesc1= "Controller Area Network for Intel(R) EP80579 Integrated Processor Product Line – 503a" 
+
+;  *******Non Localizable Strings******* 
+
+SERVICE_BOOT_START = 0x0 
+SERVICE_SYSTEM_START = 0x1 
+SERVICE_AUTO_START = 0x2 
+SERVICE_DEMAND_START = 0x3 
+SERVICE_DISABLED = 0x4 
+
+SERVICE_KERNEL_DRIVER = 0x1 
+SERVICE_ERROR_IGNORE = 0x0 
+SERVICE_ERROR_NORMAL = 0x1 
+SERVICE_ERROR_SEVERE = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+REG_EXPAND_SZ = 0x00020000 
+REG_DWORD = 0x00010001 

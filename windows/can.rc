@@ -1,0 +1,44 @@
+
+/*
+ * <COPYRIGHT_TAG>
+*/
+
+#include <windows.h>
+#include <ntverp.h>
+#include "TlpVers.h"
+
+#define VER_FILETYPE                VFT_DRV
+#define VER_FILESUBTYPE             VFT2_DRV_SYSTEM
+#define VER_FILEDESCRIPTION_STR     "Controller Area Network Device"
+#define VER_INTERNALNAME_STR        "can.sys"
+#define VER_ORIGINALFILENAME_STR    "can.sys"
+
+#undef VER_PRODUCTNAME_STR
+#define VER_PRODUCTNAME_STR         "Intel(R) Controller Area Network Device"
+
+#undef VER_COMPANYNAME_STR
+#define VER_COMPANYNAME_STR         INTEL_NAME_STR
+
+#ifdef VER_LEGALCOPYRIGHT_YEARS
+#undef VER_LEGALCOPYRIGHT_YEARS
+#endif
+#define VER_LEGALCOPYRIGHT_YEARS  INTEL_COPYRIGHT_YEARS
+
+#ifdef VER_LEGALCOPYRIGHT_STR
+#undef VER_LEGALCOPYRIGHT_STR
+#endif
+
+#define VER_LEGALCOPYRIGHT_STR    "\251 " VER_COMPANYNAME_STR " " VER_LEGALCOPYRIGHT_YEARS
+
+#ifdef VER_PRODUCTVERSION
+#undef VER_PRODUCTVERSION
+#endif
+#define VER_PRODUCTVERSION      INTEL_BUILD_VERSION
+
+
+#ifdef VER_PRODUCTVERSION_STR
+#undef VER_PRODUCTVERSION_STR
+#endif
+#define VER_PRODUCTVERSION_STR    INTEL_BUILD_VERSION_STR
+
+#include "common.ver"
